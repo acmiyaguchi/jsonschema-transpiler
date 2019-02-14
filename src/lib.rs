@@ -6,6 +6,8 @@ extern crate regex;
 extern crate serde;
 extern crate serde_json;
 
+use wasm_bindgen::prelude::*;
+
 mod ast;
 mod avro;
 mod bigquery;
@@ -72,4 +74,13 @@ pub fn convert_avro(input: &Value, context: Context) -> Value {
 pub fn convert_bigquery(input: &Value, context: Context) -> Value {
     let bq = bigquery::Schema::translate_from(into_ast(input, context), context).unwrap();
     json!(bq)
+}
+
+/// Convert JSONSchema into a BigQuery compatible schema
+#[wasm_bindgen]
+pub fn convert_bigquery(input: &JsValue) -> JsValue {
+    let jsonschema: jsonschema::Tag = input.into_serde().unwrap();
+    let ast = ast::Tag::from(jsonschema);
+    let bq = bigquery::Tag::from(ast);
+    JsValue::from_serde(&bq).unwrap()
 }
