@@ -9,16 +9,16 @@ edition = "2018"
 
 [lib]
 name = "jst"
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 clap = "~2.32"
 env_logger = "0.6.1"
 log = "0.4"
 regex = "1"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-wasm-bindgen = { version = "~0.2", features = ["serde-serialize"] }
+serde = { version = "1.0.59", features = ["derive"] }
+serde_json = "1.0.40"
+wasm-bindgen = { version = "0.2.48", features = ["serde-serialize"] }
 
 [build-dependencies]
 serde = { version = "1.0", features = ["derive"] }

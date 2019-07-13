@@ -43,6 +43,12 @@ pub enum ResolveMethod {
     Panic,
 }
 
+impl Default for ResolveMethod {
+    fn default() -> Self {
+        ResolveMethod::Cast
+    }
+}
+
 /// Options for modifying the behavior of translating between two schema
 /// formats.
 ///
@@ -51,7 +57,7 @@ pub enum ResolveMethod {
 /// particular, the context is useful for resolving edge-cases in ambiguous
 /// situations. This can includes situations like casting or dropping an empty
 /// object.
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Default)]
 pub struct Context {
     pub resolve_method: ResolveMethod,
 }
@@ -78,9 +84,12 @@ pub fn convert_bigquery(input: &Value, context: Context) -> Value {
 
 /// Convert JSONSchema into a BigQuery compatible schema
 #[wasm_bindgen]
-pub fn convert_bigquery(input: &JsValue) -> JsValue {
-    let jsonschema: jsonschema::Tag = input.into_serde().unwrap();
-    let ast = ast::Tag::from(jsonschema);
-    let bq = bigquery::Tag::from(ast);
-    JsValue::from_serde(&bq).unwrap()
+pub fn convert_bigquery_js(input: &JsValue) -> JsValue {
+    let context = Context {
+        ..Default::default()
+    };
+    let value: Value = input.into_serde().unwrap();
+    let ast_tag = into_ast(&value, context);
+    let bq_tag = bigquery::Schema::translate_from(ast_tag, context).unwrap();
+    JsValue::from_serde(&bq_tag).unwrap()
 }
