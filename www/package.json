@@ -8,7 +8,7 @@
     "codeflask": "^1.4.1",
     "jquery": "^3.4.1",
     "json-formatter-js": "^2.2.1",
-    "jst": "file:./pkg",
+    "jst": "file:../pkg",
     "popper.js": "^1.15.0"
   },
   "devDependencies": {

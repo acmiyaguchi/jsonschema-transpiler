@@ -1,4 +1,4 @@
-const rust = import('./pkg/jst');
+const rust = import('../pkg/jst');
 
 import "bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,7 +8,7 @@ import JSONFormatter from 'json-formatter-js'
 
 // Load a schema fetched via `scripts/mps-download-schemas` and loaded as a raw
 // string via webpack.
-import schema from "./schemas/glean/baseline/baseline.1.schema.json";
+import schema from "../schemas/glean/baseline/baseline.1.schema.json";
 
 console.log(schema);
 
