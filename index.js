@@ -6,31 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CodeFlask from 'codeflask';
 import JSONFormatter from 'json-formatter-js'
 
-let schema = {
-    "type": "object",
-    "properties": {
-        "id": {
-            "type": "string"
-        },
-        "payload": {
-            "type": "object",
-            "properties": {
-                "timestamp": {
-                    "type": "integer"
-                },
-                "value": {
-                    "type": "integer"
-                }
-            }
-        }
-    }
-}
+// Load a schema fetched via `scripts/mps-download-schemas` and loaded as a raw
+// string via webpack.
+import schema from "./schemas/glean/baseline/baseline.1.schema.json";
 
+console.log(schema);
 
 const flask = new CodeFlask('#editor', {
     language: 'js',
     lineNumbers: true,
-    defaultTheme: false
 });
 flask.updateCode(JSON.stringify(schema, null, 2));
 
