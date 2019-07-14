@@ -10,22 +10,13 @@ module.exports = {
         filename: 'index.js',
     },
     module: {
-    rules: [
-        {
-            test: /\.(png|jpe?g|gif)$/,
-            use: [
-              {
-                loader: 'file-loader',
-                options: {},
-              },
-            ],
+        rules: [
+          {
+            test: /\.css$/i,
+            use: ['style-loader', 'css-loader'],
           },
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader']
-        },
-      ]
-    },
+        ],
+      },
     plugins: [
         new HtmlWebpackPlugin({
             template: "index.html"

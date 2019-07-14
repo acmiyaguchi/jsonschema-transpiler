@@ -4,16 +4,17 @@
     "serve": "webpack-dev-server"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "codeflask": "^1.4.1",
     "jquery": "^3.4.1",
+    "json-formatter-js": "^2.2.1",
     "jst": "file:./pkg",
-    "jstree": "^3.3.8"
+    "popper.js": "^1.15.0"
   },
   "devDependencies": {
     "@wasm-tool/wasm-pack-plugin": "0.4.2",
     "css-loader": "^3.0.0",
-    "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "image-webpack-loader": "^5.0.0",
     "style-loader": "^0.23.1",
     "text-encoding": "^0.7.0",
     "webpack": "^4.29.4",
